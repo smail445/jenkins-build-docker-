@@ -1,17 +1,18 @@
-node {
+node{
   def app
 
-     stage('Clone')
+    stage('Clone')
          checkout scm
-     }
-     stag('Build image') {
+    }
+    stag('Build image') {
         app= docker.build("smail/nginx") 
-     }
-     stage('Run image') {
-         docker.image('smail/nginx').WithRun('-p 90:90') { c ->
-         sh 'docker ps'
+    }
+    stage('Run image') {
+        docker.image('smail/nginx').WithRun('-p 90:90') { c ->
+        sh 'docker ps'
+        sh 'curl localhost'
 
-         sh 'curl localhost'
+    }
+    }
 
-     }
-     }
+}
